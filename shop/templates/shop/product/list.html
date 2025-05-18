@@ -5,7 +5,9 @@
   <ul>
     {% for product in products %}
       <li>
-        {{ product.name }} - {{ product.price }} zł
+        <a href="{% url 'shop:product_detail' product.pk %}">
+          {{ product.name }}
+        </a> - {{ product.price }} zł
         {% if product.available %}(available){% else %}(not available){% endif %}
       </li>
     {% endfor %}
