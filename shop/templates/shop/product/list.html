@@ -1,15 +1,33 @@
 {% extends "shop/base.html" %}
 
 {% block content %}
-  <h2>Products</h2>
+  <h2>Produkty{% if category %} – {{ category.name }}{% endif %}</h2>
+
+  <div>
+    <h3>Kategorie</h3>
+    <ul>
+      <li><a href="{% url 'shop:product_list' %}">Wszystkie</a></li>
+      {% for cat in categories %}
+        <li>
+          <a href="{% url 'shop:product_list_by_category' cat.slug %}">
+            {{ cat.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
   <ul>
     {% for product in products %}
       <li>
         <a href="{% url 'shop:product_detail' product.pk %}">
           {{ product.name }}
-        </a> - {{ product.price }} zł
-        {% if product.available %}(available){% else %}(not available){% endif %}
+        </a>
+        – {{ product.price }} zł
+        {% if product.available %}(dostępny){% else %}(niedostępny){% endif %}
       </li>
+    {% empty %}
+      <li>Brak produktów w tej kategorii.</li>
     {% endfor %}
   </ul>
 {% endblock %}
