@@ -1,8 +1,12 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Sabilana | Handmade Jewelry</title>
+    <link rel="stylesheet" href="{% static 'shop/css/styles.css' %}">
+<script src="{% static 'shop/js/scripts.js' %}" defer></script>
+
 </head>
 <body>
     <h1><a href="{% url 'shop:product_list' %}">Sabilana</a></h1>
@@ -10,4 +14,11 @@
     {% block content %}
     {% endblock %}
 </body>
+
+
+<script>
+  function openNotifyForm(productId) {
+    alert("Kliknięto Powiadom o dostępności dla produktu ID: " + productId);
+  }
+</script>
 </html>

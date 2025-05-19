@@ -15,5 +15,6 @@ def product_list(request, category_slug=None):
         'products': products,
     })
 def product_detail(request, pk):
-    product = get_object_or_404(Product, pk=pk, available=True)
+    product = get_object_or_404(Product, pk=pk, is_archived=False)
+
     return render(request, 'shop/product/detail.html', {'product': product})
