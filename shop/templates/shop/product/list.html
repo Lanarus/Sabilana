@@ -21,10 +21,11 @@
     {% for product in products %}
       <li>
         <a href="{% url 'shop:product_detail' product.pk %}">
-          {{ product.name }}
+        {{ product.name }}
         </a>
-        – {{ product.price }} zł
-        {% if product.available %}(dostępny){% else %}(niedostępny){% endif %}
+        – {{ product.price_domestic }} zł
+
+        {% include "shop/partials/product_actions.html" %}
       </li>
     {% empty %}
       <li>Brak produktów w tej kategorii.</li>

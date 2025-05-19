@@ -3,13 +3,9 @@
 {% block content %}
   <h1>{{ product.name }}</h1>
   <p>{{ product.description }}</p>
-  <p>Cena: {{ product.price }} zł</p>
+  <p>Cena: {{ product.price_domestic }} zł</p>
 
-  {% if product.available %}
-    <p style="color:green;">Dostępny</p>
-  {% else %}
-    <p style="color:red;">Niedostępny</p>
-  {% endif %}
+  {% include "shop/partials/product_actions.html" %}
 
   <a href="{% url 'shop:product_list' %}">← Powrót do listy produktów</a>
 {% endblock %}

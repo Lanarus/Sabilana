@@ -1,0 +1,13 @@
+<div class="product-actions">
+  {% if product.available_quantity > 0 %}
+    <button class="btn-cart">Dodaj do koszyka</button>
+  {% else %}
+    <button onclick="openNotifyForm({{ product.id }})" class="btn-notify">
+      Powiadom o dostępności
+    </button>
+  {% endif %}
+
+  <button class="btn-favorite">
+    ❤️ Dodaj do ulubionych
+  </button>
+</div>
