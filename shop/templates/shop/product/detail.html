@@ -3,13 +3,53 @@
 {% block content %}
   <h1>{{ product.name }}</h1>
 
-  <p>{{ product.description }}</p>
+  <p><strong>Opis:</strong> {{ product.description }}</p>
+  <p><strong>Cena:</strong> {{ product.price_domestic }} zł</p>
 
-  <p>Cena: {{ product.price_domestic }} zł</p>
+  {% if product.length %}
+    <p><strong>Długość:</strong> {{ product.length }} cm</p>
+  {% endif %}
 
+  {% if product.width %}
+    <p><strong>Szerokość:</strong> {{ product.width }} cm</p>
+  {% endif %}
+
+  {% if product.materials %}
+    <p><strong>Materiały:</strong> {{ product.materials }}</p>
+  {% endif %}
+
+  {% if product.colors %}
+    <p><strong>Kolory:</strong> {{ product.colors }}</p>
+  {% endif %}
+
+  {% if product.available_quantity %}
+    <p><strong>Dostępne sztuki:</strong> {{ product.available_quantity }}</p>
+  {% else %}
+    <p><strong>Produkt niedostępny</strong></p>
+  {% endif %}
+
+  {% if product.categories.exists %}
+    <p><strong>Kategorie:</strong>
+      {% for category in product.categories.all %}
+        {{ category.name }}{% if not forloop.last %}, {% endif %}
+      {% endfor %}
+    </p>
+  {% endif %}
+
+  {% if product.variants.exists %}
+    <p><strong>Warianty:</strong>
+      <ul>
+        {% for variant in product.variants.all %}
+          <li>{{ variant.name }}</li>
+        {% endfor %}
+      </ul>
+    </p>
+  {% endif %}
+
+  <p><strong>Dodano:</strong> {{ product.created|date:"d.m.Y" }}</p>
+
+  <!-- Sekcja akcji (dodaj do koszyka, ulubione itp.) -->
   {% include "shop/partials/product/actions.html" %}
 
-  <p>
-    <a href="{% url 'shop:product_list' %}">← Powrót do listy produktów</a>
-  </p>
+  <a href="{% url 'shop:product_list' %}">← Powrót do listy produktów</a>
 {% endblock %}
