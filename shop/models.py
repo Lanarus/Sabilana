@@ -108,9 +108,13 @@ class ProductImage(models.Model):
         verbose_name=_("Image"),
         validators=[validate_image_size]
     )
+    order = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"Image for {self.product.name}"
+
+    class Meta:
+        ordering = ['order']
 
 class ProductVideo(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE, related_name='video')
